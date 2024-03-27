@@ -1,12 +1,12 @@
 import streamlit as st
-from predict_page import show_predict_page
-#from explore_page import show_explore_page
+from predict_page import Predict
+from explore_page import Explore
 
 
 page = st.sidebar.selectbox("Explore Or Predict", ("Predict", "Explore"))
 
 if page == "Predict":
-    show_predict_page()
+    Predict.show_predict_page()
 else:
     print("sorting it")
-    #show_explore_page()
+    Explore.show_explore_page()

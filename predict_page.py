@@ -15,7 +15,7 @@ class Predict:
     le_country = data["le_country"]
     le_education = data["le_education"]
 
-    def show_predict_page(self, le_country=None, le_education=None, regressor=None):
+    def show_predict_page(self):
         st.title("Software Developer Salary Prediction")
 
         st.write("""### We need some information to predict the salary""")
@@ -53,9 +53,9 @@ class Predict:
         ok = st.button("Calculate Salary")
         if ok:
             x = np.array([[country, education, expericence]])
-            x[:, 0] = le_country.transform(x[:, 0])
-            x[:, 1] = le_education.transform(x[:, 1])
+            x[:, 0] = self.le_country.transform(x[:, 0])
+            x[:, 1] = self.le_education.transform(x[:, 1])
             x = x.astype(float)
 
-            salary = regressor.predict(x)
+            salary = self.regressor.predict(x)
             st.subheader(f"The estimated salary is ${salary[0]:.2f}")
