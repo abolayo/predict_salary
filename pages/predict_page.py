@@ -20,9 +20,9 @@ def show_predict_page():
     st.write("""### We need some information to predict the salary""")
 
     countries = (
-        "United States",
+        "United States of America",
         "India",
-        "United Kingdom",
+        "United Kingdom of Great Britain and Northern Ireland",
         "Germany",
         "Canada",
         "Brazil",
@@ -34,6 +34,7 @@ def show_predict_page():
         "Italy",
         "Russian Federation",
         "Sweden",
+        "Switzerland",
     )
 
     education = (
@@ -46,14 +47,14 @@ def show_predict_page():
     country = st.selectbox("Country", countries)
     education = st.selectbox("Education Level", education)
 
-    expericence = st.slider("Years of Experience", 0, 50, 3)
+    experience = st.slider("Years of Experience", 0, 50, 3)
 
     ok = st.button("Calculate Salary")
     if ok:
-        X = np.array([[country, education, expericence ]])
-        X[:, 0] = le_country.transform(X[:,0])
-        X[:, 1] = le_education.transform(X[:,1])
-        X = X.astype(float)
+        x = np.array([[country, education, experience]])
+        x[:, 0] = le_country.transform(x[:, 0])
+        x[:, 1] = le_education.transform(x[:, 1])
+        x = x.astype(float)
 
-        salary = regressor.predict(X)
+        salary = regressor.predict(x)
         st.subheader(f"The estimated salary is ${salary[0]:.2f}")
